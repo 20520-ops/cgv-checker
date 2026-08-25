@@ -1,19 +1,11 @@
-name: CGV Ticket Auto Checker
+import os
+import smtplib
+from email.mime.text import MIMEText
 
-on:
-  workflow_dispatch:
+print("CGV 티켓 확인 크롤러를 시작합니다...")
 
-jobs:
-  check-ticket:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+# 예매 확인 로직 및 이메일 발송 코드 작성 위치
+# GMAIL_ID = os.environ.get("GMAIL_ID")
+# GMAIL_APP_PW = os.environ.get("GMAIL_APP_PW")
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Run Crawler
-        run: python crawler.py
+print("점검 완료!")
