@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 EMAIL_USER = "3branwell@gmail.com"
-EMAIL_PASS = "jskofjyzxvrfcyqi"  # 새로 발급받으신 유효한 앱 비밀번호
+EMAIL_PASS = "jskofjyzxvrfcyqi"
 
 def send_email():
     msg = MIMEText("테스트 메일 전송 성공했습니다!")
