@@ -2,7 +2,8 @@ import smtplib
 from email.mime.text import MIMEText
 
 EMAIL_USER = "3branwell@gmail.com"
-EMAIL_PASS = "nfwjodvpugdhguqn"
+# 아래에 새로 발급받은 16자리 앱 비밀번호를 넣으세요
+EMAIL_PASS = "jsko fjyz xvrf cyqi"
 
 def send_email():
     msg = MIMEText("테스트 메일입니다.")
@@ -10,13 +11,11 @@ def send_email():
     msg['From'] = EMAIL_USER
     msg['To'] = EMAIL_USER
 
-    # 에러 내용을 강제로 출력하여 로그에 기록
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(EMAIL_USER, EMAIL_PASS)
     server.sendmail(EMAIL_USER, EMAIL_USER, msg.as_string())
     server.quit()
-    print(">>> SUCCESS: 메일 발송 성공! <<<")
 
 if __name__ == "__main__":
     send_email()
