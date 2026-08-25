@@ -1,32 +1,25 @@
-import os
 import smtplib
 from email.mime.text import MIMEText
 
-EMAIL_USER = os.environ.get("EMAIL_USER")
-EMAIL_PASS = os.environ.get("EMAIL_PASS")
+# 본인 계정 정보 직접 지정 (오류 원인 완벽 제거)
+EMAIL_USER = "3branwell@gmail.com"
+EMAIL_PASS = "nfwjodvpugdhguqn"
 
-def send_email(subject, content):
-    if not EMAIL_USER or not EMAIL_PASS:
-        return
-
-    msg = MIMEText(content)
-    msg['Subject'] = subject
+def send_test_email():
+    msg = MIMEText("이 메일이 도착했다면 알림 연동 및 서버 연결 완벽 성공입니다!")
+    msg['Subject'] = "🚨 [테스트] CGV 용산 IMAX 알림 테스트!"
     msg['From'] = EMAIL_USER
-    # 본인 지메일 주소 전체 (숫자 3 포함)
-    msg['To'] = "3branwell@gmail.com"
+    msg['To'] = EMAIL_USER
 
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(EMAIL_USER, EMAIL_PASS)
-        server.sendmail(EMAIL_USER, msg['To'], msg.as_string())
+        server.sendmail(EMAIL_USER, EMAIL_USER, msg.as_string())
         server.quit()
-        print("메일 발송 완료")
+        print("메일 발송 완료!")
     except Exception as e:
-        print(f"오류: {e}")
+        print(f"발송 실패 원인: {e}")
 
 if __name__ == "__main__":
-    send_email(
-        "🚨 [테스트] CGV 용산 IMAX 알림 테스트!",
-        "이 메일이 보인다면 알림연동 완벽 성공입니다!"
-    )
+    send_test_email()
