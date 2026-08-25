@@ -1,14 +1,10 @@
-import os
+Import os
 import smtplib
 from email.mime.text import MIMEText
 import requests
 from bs4 import BeautifulSoup
-from flask import Flask
 
-# Flask 웹 서버 생성
-app = Flask(__name__)
-
-# Render 환경 변수에서 보안 변수 불러오기 (기존 GitHub Secrets 역할)
+# GitHub Secrets에서 보안 변수 불러오기
 GMAIL_ID = os.environ.get("GMAIL_ID")
 GMAIL_APP_PW = os.environ.get("GMAIL_APP_PW")
 
@@ -75,13 +71,5 @@ def check_cgv_imax():
     except Exception as e:
         print(f"❌ [크롤링 오류] 예외 발생: {e}")
 
-# 누군가(UptimeRobot)가 접속할 때마다 크롤링 실행!
-@app.route('/')
-def keep_alive():
-    check_cgv_imax()
-    return "서버가 정상 작동 중이며, CGV 용아맥을 확인했습니다!"
-
 if __name__ == "__main__":
-    # Render 환경에 맞게 포트 설정 후 서버 실행
-    port = int(os.environ.get('PORT', 10000))
-    app.run(host='0.0.0.0', port=port)
+    check_cgv_imax()
