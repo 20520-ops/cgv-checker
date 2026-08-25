@@ -18,16 +18,12 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        # 만약 requirements.txt 파일이 있다면 pip install -r requirements.txt 로 변경하세요.
-        # 아래는 주로 크롤링에 쓰이는 패키지 예시입니다. 본인이 쓴 라이브러리로 수정하세요.
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 
 
       - name: Run Crawler
         env:
-          # GitHub 저장소 Settings -> Secrets and variables -> Actions에서 추가한 변수를 가져옵니다.
           GMAIL_ID: ${{ secrets.GMAIL_ID }}
           GMAIL_APP_PW: ${{ secrets.GMAIL_APP_PW }}
-        run: python crawler.py
         run: python crawler.py
