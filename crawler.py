@@ -2,10 +2,10 @@ import smtplib
 from email.mime.text import MIMEText
 
 EMAIL_USER = "3branwell@gmail.com"
-EMAIL_PASS = "jskofjyzxvrfcyqi"
+EMAIL_PASS = "jskofjyzxvrfcyqi"  # 새로 발급받으신 유효한 앱 비밀번호
 
 def send_email():
-    msg = MIMEText("테스트 메일 전송에 성공했습니다.")
+    msg = MIMEText("테스트 메일 전송 성공했습니다!")
     msg['Subject'] = "🚨 [테스트] CGV 용산 IMAX 알림 테스트!"
     msg['From'] = EMAIL_USER
     msg['To'] = EMAIL_USER
