@@ -1,9 +1,8 @@
 name: CGV Ticket Auto Checker
-
 on:
   schedule:
     - cron: '*/4 * * * *'  # 4분마다 자동 실행 (3~5분 사이 간격)
-  workflow_dispatch:      # 필요시 수동 실행 버튼도 유지
+  workflow_dispatch:       # 필요시 수동 실행 버튼도 유지
 
 jobs:
   check-ticket:
@@ -13,11 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. 파이썬 환경 구축 (3.10 버전)
+      # 2. 파이썬 환경 구축 (3.10 버전) - 파라미터 수정
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-code: '3.10'
+          python-version: '3.10'
 
       # 3. 크롤링 및 이메일에 필요한 필수 라이브러리 설치
       - name: Install Dependencies
@@ -25,10 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      # 4. Secrets 보안 변수를 파이썬 환경변수로 전달하여 crawler.py 실행
+      # 4. Secrets 보안 변수를 파이썬 환경변수로 전달하여 crawler.py 실행 - 중복 및 오타 제거
       - name: Run Crawler
         env:
           GMAIL_ID: ${{ secrets.GMAIL_ID }}
           GMAIL_APP_PW: ${{ secrets.GMAIL_APP_PW }}
-        run: python crawler.py.GMAIL_APP_PW }}
         run: python crawler.py
